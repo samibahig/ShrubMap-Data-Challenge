@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
+FROM pytorch/pytorch:1.13.1-cuda11.6-cudnn8-runtime
 
 # Dépendances système pour GDAL/rasterio
 RUN apt-get update && apt-get install -y \
@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     wget \
     && rm -rf /var/lib/apt/lists/*
 
-# Copie requirements.txt en premier (cache Docker optimisé)
+# Copie requirements.txt
 COPY requirements.txt .
 
 # Dépendances Python via requirements.txt
