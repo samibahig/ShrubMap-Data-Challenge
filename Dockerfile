@@ -1,8 +1,8 @@
-FROM jupyter/scipy-notebook:latest
+FROM jupyter/scipy-notebook:python-3.10
 
 USER root
 
-# GDAL et dépendances système
+# GDAL système
 RUN apt-get update && apt-get install -y \
     libgdal-dev \
     gdal-bin \
@@ -12,14 +12,19 @@ RUN apt-get update && apt-get install -y \
 RUN pip install --no-cache-dir \
     rasterio \
     geopandas \
+    shapely \
+    pyproj \
+    fiona \
     pystac-client \
     laspy \
     folium
 
-# PyTorch CPU/GPU
+# PyTorch compatible CC 6.1
 RUN pip install --no-cache-dir \
     torch==1.13.1 \
-    torchvision==0.14.1
+    torchvision==0.14.1 \
+    scikit-learn \
+    tqdm
 
 USER jovyan
 WORKDIR /home/jovyan/work
