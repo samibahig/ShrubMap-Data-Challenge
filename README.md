@@ -86,41 +86,49 @@ EcoHealth-ShrubMap/
 
 ## ⚙️ Environment Setup
 
-### Option A — NRP JupyterHub *(Recommended — GPU required for training)*
+### ✅ Option A — NRP JupyterHub *(Recommended for Judges)*
 
 1. Log in at [NRP JupyterHub](https://datachallenge-jupyterhub.wildfirecommons.org)
 2. Configure your server:
 
 | Setting | Value |
 |---|---|
-| GPU | 1 × NVIDIA GeForce GTX 1080 Ti |
+| GPU | NVIDIA A100 80GB or RTX A6000 |
 | CPU Cores | 8–16 |
 | RAM | 32–64 GB |
-| Image | Minimal Starter Jupyter Lab |
+| Image (Bring Your Own) | `sambahig/ecohealthshrubmap:latest` |
 | /dev/shm for PyTorch | ✅ Enabled |
 | Architecture | amd64 |
 
-3. Upload the notebook and run
+3. Open notebook: `notebooks/shrub_pipeline_sprint4.ipynb`
+4. Run all cells: **Kernel → Restart & Run All**
 
-> ⚠️ **Note:** GPUs are only available on NRP, not on the dedicated challenge JupyterHub. The two platforms are not synchronized — keep all files on one platform.
+> 🐳 Docker image built and published automatically via GitHub Actions CI/CD pipeline.
+> No manual installation required — all dependencies are pre-installed in the image.
 
-### Option B — Docker
+> ⚠️ **Note on GPU compatibility:** The GTX 1080 Ti (Compute Capability 6.1) is 
+> incompatible with PyTorch 2.1+. The custom Docker image resolves this by targeting 
+> CUDA 12.1 compatible GPUs (A100, RTX A6000, V100).
+
+---
+
+---
+
+### Option B — Local (CPU only)
 
 ```bash
-docker pull pytorch/pytorch:2.1.0-cuda11.8-cudnn8-runtime
-pip install -r requirements.txt
-```
-
-### Option C — Local (CPU only)
-
-```bash
-git clone https://github.com/your-username/EcoHealth-ShrubMap.git
+git clone https://github.com/samibahig/EcoHealth-ShrubMap.git
 cd EcoHealth-ShrubMap
 pip install -r requirements.txt
-jupyter lab
+jupyter lab notebooks/shrub_pipeline_sprint4.ipynb
 ```
 
 ---
+### Option C — Docker (Advanced)
+
+```bash
+docker pull sambahig/ecohealthshrubmap:latest
+```
 
 ## 🚀 How to Run
 
