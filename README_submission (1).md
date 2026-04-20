@@ -47,7 +47,7 @@
 
 ## How to Run
 
-### Option 1 — Docker (recommended)
+### Option 1 — Docker (for local reproducibility)
 
 ```bash
 # Clone the repo
